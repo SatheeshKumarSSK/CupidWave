@@ -2,50 +2,48 @@
     <div class="container">
         <div class="container-fluid">
             <a class="navbar-brand" routerLink="/" routerLinkActive="active">CupidWave</a>
-            <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-                (click)="toggleCollapsed">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div id="navbarSupportedContent" [ngClass]="{'collapse':collapsed , 'navbar-collapse':true}"></div>-->
-
-
-            <ul class="navbar-nav mr-auto">
-                <ng-container *ngIf="accountService.currentUser$|async">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <ng-container *ngIf="accountService.currentUser$|async">
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink='/members' routerLinkActive="active">Matches</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/lists" routerLinkActive="active">Lists</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
+                        </li>
+                    </ng-container>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink='/members' routerLinkActive="active">Matches</a>
+                        <a class="nav-link" routerLink="/errors" routerLinkActive="active">Errors</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="/lists" routerLinkActive="active">Lists</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
-                    </li>
-                </ng-container>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/errors" routerLinkActive="active">Errors</a>
-                </li>
-            </ul>
+                </ul>
 
-            <div class="dropdown" *ngIf="(accountService.currentUser$|async) as user" dropdown>
-                <img src="{{user.photoUrl}}" alt="{{user.username}">
-                <a class="dropdown-toggle text-light ml-2pho" dropdownToggle>Welcome {{user.username|titlecase}}</a>
-                <div class="dropdown-menu" *dropdownMenu="">
-                    <a routerLink="/member/edit" class="dropdown-item">Edit Profile</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" (click)="logout()">Logout</a>
+                <div class="dropdown" *ngIf="(accountService.currentUser$|async) as user" dropdown>
+                    <img src="{{user.photoUrl || './assets/user.png'}}" alt="{{user.username}}">
+                    <a class="dropdown-toggle text-light ml-2pho" dropdownToggle>Welcome {{user.username|titlecase}}</a>
+                    <div class="dropdown-menu" *dropdownMenu="">
+                        <a routerLink="/member/edit" class="dropdown-item">Edit Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" (click)="logout()">Logout</a>
+                    </div>
                 </div>
-            </div>
 
-            <form *ngIf="(accountService.currentUser$|async)===null" #loginForm="ngForm"
-                class="form-inline mt-2 mt-md-0" (ngSubmit)="login()" autocomplete="off">
-                <input name="username" [(ngModel)]="model.username" class="form-control mr-sm-2" type="text"
-                    placeholder="UserName">
-                <input name="password" [(ngModel)]="model.password" class="form-control mr-sm-2" type="password"
-                    placeholder="Password">
-                <button class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
-            </form>
+                <form *ngIf="(accountService.currentUser$|async)===null" #loginForm="ngForm"
+                    class="form-inline mt-2 mt-md-0" (ngSubmit)="login()" autocomplete="off">
+                    <input name="username" [(ngModel)]="model.username" class="form-control mr-sm-2" type="text"
+                        placeholder="UserName">
+                    <input name="password" [(ngModel)]="model.password" class="form-control mr-sm-2" type="password"
+                        placeholder="Password">
+                    <button class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+                </form>
+            </div>
         </div>
     </div>
 </nav>

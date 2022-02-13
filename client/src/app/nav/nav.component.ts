@@ -11,11 +11,6 @@ import { AccountService } from '../_services/account.service';
 export class NavComponent implements OnInit {
   model: any = {}
 
-  /*collapsed = true;
-  toggleCollapsed(): void {
-    this.collapsed = this.collapsed;
-  }*/
-
   constructor(public accountService: AccountService,private router:Router,
     private toastr:ToastrService) { }
 

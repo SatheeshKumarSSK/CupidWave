@@ -457,4 +457,3 @@ appsettings.json
 client/ssl/server.crt
 client/ssl/server.key
 API/datingapp.db
-
