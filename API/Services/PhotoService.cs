@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using API.Helper;
+using API.Helpers;
 using API.Interfaces;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
