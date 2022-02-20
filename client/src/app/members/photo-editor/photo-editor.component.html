@@ -1,7 +1,7 @@
 <div class="row">
-    <div class="col-2" *ngFor="let photo of member.photos">
+    <div class="col-3" *ngFor="let photo of member.photos">
         <img src="{{photo.url}}" alt="{{photo.url}}" class="img-thumbnail p-1">
-        <div class="text-center">
+        <div class="text-left">
             <button 
             [disabled]="photo.isMain"
             (click)="setMainPhoto(photo)"
@@ -38,7 +38,7 @@
         <input type="file" ng2FileSelect [uploader]="uploader" />
     </div>
 
-    <div class="col-md-9" style="margin-bottom: 40px" *ngIf="uploader?.queue?.length">
+    <div class="col-md-9" style="margin-bottom: 10%" *ngIf="uploader?.queue?.length">
 
         <h3>Upload queue</h3>
         <p>Queue length: {{ uploader?.queue?.length }}</p>
@@ -65,15 +65,15 @@
                     <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
                 </div>
             </div>
-            <button type="button" class="btn btn-success btn-s"
+            <button type="button" class="btn btn-success ml-1 mt-1 btn-s"
                     (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
                 <span class="fa fa-upload"></span> Upload all
             </button>
-            <button type="button" class="btn btn-warning btn-s"
+            <button type="button" class="btn btn-warning ml-1 mt-1 btn-s"
                     (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
                 <span class="fa fa-ban"></span> Cancel all
             </button>
-            <button type="button" class="btn btn-danger btn-s"
+            <button type="button" class="btn btn-danger ml-1 mt-1 btn-s"
                     (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
                 <span class="fa fa-trash"></span> Remove all
             </button>
