@@ -26,7 +26,7 @@ namespace API.Controllers
         {
             var sourceUserId = User.GetUserId();
             var likedUser = await _userRepository.GetUserByUsernameAsync(username);
-            var sourceUser = await _likesRepository.GetUserWithLikes(sourceUserId);
+            var sourceUser = await _likesRepository.GetUserWithFollowing(sourceUserId);
 
             if (likedUser == null) return NotFound();
 

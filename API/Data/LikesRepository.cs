@@ -53,7 +53,7 @@ namespace API.Data
             likesParams.PageNumber, likesParams.PageSize);
         }
 
-        public async Task<AppUser> GetUserWithLikes(int userId)
+        public async Task<AppUser> GetUserWithFollowing(int userId)
         {
             return await _context.Users
                 .Include(x => x.Following)
