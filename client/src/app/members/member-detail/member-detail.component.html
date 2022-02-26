@@ -21,10 +21,8 @@
                     <p>{{member.lastActive | timeago}}</p>
                 </div>
                 <div class="card-footer">
-                    <div class="btn-group d-flex">
-                        <button class="btn btn-primary">Like</button>
-                        <button (click)="selectTab(3)" class="btn btn-success">Message</button>
-                    </div>
+                    <button class="btn btn-primary btn-block">Like</button>
+                    <button (click)="selectTab(3)" class="btn btn-success btn-block">Message</button>
                 </div>
             </div>
         </div>
@@ -43,7 +41,7 @@
             </tab>
             <tab heading="Photos" (selectTab)="onTabActivated($event)">
                 <ngx-gallery [options]="galleryOptions" [images]="galleryImages"
-                    style="display: inline-block; margin-bottom: 20px;" class="ngx-gallery"></ngx-gallery>
+                    style="display: inline-block;" class="ngx-gallery"></ngx-gallery>
             </tab>
             <tab heading="Messages" (selectTab)="onTabActivated($event)">
                 <app-member-messages [messages]="messages" [username]="member.username"></app-member-messages>
