@@ -34,6 +34,7 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
         {
             var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+
             userParams.CurrentUserName = user.UserName;
 
             if (string.IsNullOrEmpty(userParams.Gender))
@@ -48,7 +49,7 @@ namespace API.Controllers
 
             return Ok(users);
         }
-
+        
         [HttpGet("{username}", Name = "GetUser")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
@@ -65,6 +66,7 @@ namespace API.Controllers
             _userRepository.Update(user);
 
             if (await _userRepository.SaveAllAsync()) return NoContent();
+
             return BadRequest("Failed to update user");
         }
 
@@ -108,7 +110,9 @@ namespace API.Controllers
             if (photo.IsMain) return BadRequest("This is already your main photo");
 
             var currentMain = user.Photos.FirstOrDefault(x => x.IsMain);
+
             if (currentMain != null) currentMain.IsMain = false;
+
             photo.IsMain = true;
 
             if (await _userRepository.SaveAllAsync()) return NoContent();
