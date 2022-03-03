@@ -30,13 +30,16 @@ export class AccountService {
     return this.http.post(this.baseUrl + 'account/register', model).pipe(
       map((user: User) => {
         if (user) {
-         this.setCurrentUser(user);
+          this.setCurrentUser(user);
         }
       })
     )
   }
 
   setCurrentUser(user: User) {
+    user.roles = [];
+    const userRoles = this.getDecodedToken(user.token).role;
+    Array.isArray(userRoles) ? user.roles = userRoles : user.roles.push(userRoles)
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
   }
@@ -46,4 +49,7 @@ export class AccountService {
     this.currentUserSource.next(null);
   }
 
+  getDecodedToken(token) {
+    return JSON.parse(atob(token.split('.')[1]));
+  }
 }

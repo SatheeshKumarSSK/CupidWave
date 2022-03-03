@@ -45,7 +45,7 @@ export class MembersService {
   getMembers(userParams: UserParams) {
     var response = this.memberCache.get(Object.values(userParams).join('-'));
     if (response) {
-      return of(response)
+      return of(response);
     }
 
     let params = getPaginationHeaders(userParams.pageNumber, userParams.pageSize);
