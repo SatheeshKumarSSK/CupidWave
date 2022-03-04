@@ -1,7 +1,7 @@
 img.img-thumbnail {
-    height: 50%;
-    min-width: 50% !important;
-    margin: 0% 0 5% 0;
+    height: 75%;
+    min-width: 75% !important;
+    margin-bottom: 5%;
 }
 
 .nv-file-over {

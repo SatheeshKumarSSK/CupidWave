@@ -1,7 +1,7 @@
 <div class="row">
-    <div class="col-3" *ngFor="let photo of member.photos">
+    <div class="col-lg-2 col-md-3 col-sm-4 col-5" *ngFor="let photo of member.photos">
         <img src="{{photo.url}}" alt="{{photo.url}}" class="img-thumbnail p-1">
-        <div class="text-left">
+        <div class="d-flex">
             <button 
             [disabled]="photo.isMain"
             (click)="setMainPhoto(photo)"
@@ -16,9 +16,8 @@
     </div>
 </div>
 
-<div class="row mt-3">
- 
-    <div class="col-md-3">
+<div class="row mt-3"> 
+    <div class="col-md-3 mt-2">
 
         <h3>Add Photos</h3>
 
@@ -38,7 +37,7 @@
         <input type="file" ng2FileSelect [uploader]="uploader" />
     </div>
 
-    <div class="col-md-9" style="margin-bottom: 10%" *ngIf="uploader?.queue?.length">
+    <div class="col-md-9 mt-2" style="margin-bottom: 10%" *ngIf="uploader?.queue?.length">
 
         <h3>Upload queue</h3>
         <p>Queue length: {{ uploader?.queue?.length }}</p>
