@@ -53,6 +53,7 @@ export class RegisterComponent implements OnInit {
       this.router.navigateByUrl('/members');
     }, error => {
       this.validationErrors = error;
+      this.toastr.error("Password must have at least one digit, one lowercase and one uppercase");
     })
   }
 

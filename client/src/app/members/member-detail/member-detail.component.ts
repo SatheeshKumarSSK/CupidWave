@@ -67,12 +67,6 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     return imageUrls;
   }
 
-  loadMessage() {
-    this.messageService.getMessageThread(this.member.username).subscribe(response => {
-      this.messages = response;
-    })
-  }
-
   selectTab(tabId: number) {
     this.memberTabs.tabs[tabId].active = true;
   }
