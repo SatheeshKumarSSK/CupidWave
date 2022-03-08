@@ -66,10 +66,6 @@ export class MessageService {
     }
   }
 
-  getMessageThread(username: string) {
-    return this.http.get<Message[]>(this.baseUrl + 'messages/thread/' + username);
-  }
-
   async sendMessage(username: string, content: string) {
     return this.hubConnection.invoke('SendMessage', { recipientUsername: username, content })
       .catch(error => console.log(error));
