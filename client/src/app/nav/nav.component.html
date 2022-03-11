@@ -1,13 +1,13 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
     <div class="container">
         <div class="container-fluid">
-            <a class="navbar-brand" routerLink="/" routerLinkActive="active">Cupid Wave</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            <a class="navbar-brand" routerLink="/" routerLinkActive="active">CupidWave</a>
+            <button class="navbar-toggler" type="button" (click)="toggleNavbar()" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngClass]="{ 'show': navbarOpen }">
                 <ul class="navbar-nav mr-auto">
                     <ng-container *ngIf="accountService.currentUser$|async">
                         <li class="nav-item">
