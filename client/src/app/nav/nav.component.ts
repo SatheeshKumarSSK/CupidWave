@@ -10,6 +10,7 @@ import { AccountService } from '../_services/account.service';
 })
 export class NavComponent implements OnInit {
   model: any = {}
+  navbarOpen = false;
 
   constructor(public accountService: AccountService,private router:Router,
     private toastr:ToastrService) { }
@@ -25,6 +26,10 @@ export class NavComponent implements OnInit {
   logout() {
     this.accountService.logout();
     this.router.navigateByUrl('/');
+  }
+
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
   }
 
 }
