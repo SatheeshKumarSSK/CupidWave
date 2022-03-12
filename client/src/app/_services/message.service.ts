@@ -8,6 +8,7 @@ import { Message } from '../_models/message';
 import { User } from '../_models/user';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
 import { Group } from '../_models/group';
+import { BusyService } from './busy.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class MessageService {
   private messageThreadSource = new BehaviorSubject<Message[]>([]);
   messageThread$ = this.messageThreadSource.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private busyService:BusyService) { }
 
   getMessages(pageNumber, pageSize, container) {
     let params = getPaginationHeaders(pageNumber, pageSize);
@@ -34,7 +35,8 @@ export class MessageService {
       })
       .withAutomaticReconnect().build()
 
-    this.hubConnection.start().catch(error => console.log(error));
+    this.hubConnection.start().catch(error => console.log(error))
+      .finally(()=>this.busyService.idle());
 
     this.hubConnection.on('ReceiveMessageThread', messages => {
       this.messageThreadSource.next(messages);
@@ -62,7 +64,8 @@ export class MessageService {
 
   stopHubConnection() {
     if (this.hubConnection) {
-      this.hubConnection.stop().catch(error => console.log(error));
+      this.messageThreadSource.next([]);
+      this.hubConnection.stop();
     }
   }
 

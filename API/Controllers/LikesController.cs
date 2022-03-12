@@ -32,7 +32,7 @@ namespace API.Controllers
 
             var userLike = await _unitOfWork.LikesRepository.GetUserLike(sourceUserId, likedUser.Id);
 
-            if (userLike != null) return BadRequest("You already liked this user");
+            if (userLike != null) return BadRequest("You already like this user");
 
             userLike = new UserLike
             {
