@@ -1,0 +1,24 @@
+<div class="container mt-5">
+    <div *ngIf="!registerMode && !(accountService.currentUser$|async)" style='text-align: center;'>
+        <h1>Find your matches</h1>
+        <p class="lead">Come on in to view your matches... all you need to do is sign up!</p>
+        <div class="text-center">
+            <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2">Register</button>
+            <button class="btn btn-info btn-lg mr-2">Learn more</button>
+        </div>
+    </div>
+
+    <div *ngIf="accountService.currentUser$|async" style="text-align:center">
+        <h1>CUPIDWAVE</h1>
+        <h3>Welcome to CupidWave</h3>
+        <button class="btn btn-outline-info" routerLink='/members'>Explore The App</button>
+    </div>
+
+    <div *ngIf="registerMode" class="container">
+        <div class="row justify-content-center">
+            <div class="col4">
+                <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
+            </div>
+        </div>
+    </div>
+</div>
