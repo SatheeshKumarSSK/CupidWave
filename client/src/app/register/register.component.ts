@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.intitializeForm();
     this.maxDate = new Date();
-    this.maxDate.setFullYear(this.maxDate.getFullYear() -18);
+    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
   }
 
   intitializeForm() {
@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
       city: ['', Validators.required],
       country: ['', Validators.required],
       password: ['', [Validators.required, 
-        Validators.minLength(4), Validators.maxLength(8)]],
+        Validators.minLength(6), Validators.maxLength(10)]],
       confirmPassword: ['', [Validators.required, this.matchValues('password')]]
     }),
       this.registerForm.controls.password.valueChanges.subscribe(() => {
@@ -53,6 +53,7 @@ export class RegisterComponent implements OnInit {
       this.router.navigateByUrl('/members');
     }, error => {
       this.validationErrors = error;
+      this.toastr.warning("Username can only contain letters or digits");
       this.toastr.error("Password must have at least one digit, one lowercase and one uppercase");
     })
   }
