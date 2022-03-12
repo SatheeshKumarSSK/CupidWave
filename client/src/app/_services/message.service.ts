@@ -23,7 +23,6 @@ export class MessageService {
   constructor(private http: HttpClient, private busyService:BusyService) { }
 
   getMessages(pageNumber, pageSize, container) {
-    this.busyService.busy();
     let params = getPaginationHeaders(pageNumber, pageSize);
     params = params.append('Container', container);
     return getPaginatedResult<Message[]>(this.baseUrl + 'messages', params, this.http);
