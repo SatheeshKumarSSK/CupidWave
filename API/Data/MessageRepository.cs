@@ -51,17 +51,39 @@ namespace API.Data
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<Message> GetMessage(int id)
-        {
-            return await _context.Messages.Include(x => x.Sender).Include(x => x.Recipient)
-            .SingleOrDefaultAsync(y => y.Id == id);
-        }
-
         public async Task<Group> GetMessageGroup(string groupName)
         {
             return await _context.Groups
                 .Include(x => x.Connections)
                 .FirstOrDefaultAsync(x => x.Name == groupName);
+        }
+
+        public async Task<IEnumerable<MessageDto>> GetMessageThread(string currentUsername, 
+            string recipientUsername)
+        {
+            var messages = await _context.Messages
+                .Where(m => m.Recipient.UserName == currentUsername && m.RecipientDeleted == false
+                        && m.Sender.UserName == recipientUsername
+                        || m.Recipient.UserName == recipientUsername
+                        && m.Sender.UserName == currentUsername && m.SenderDeleted == false
+                )
+                .MarkUnreadAsRead(currentUsername)
+                .OrderBy(m => m.MessageSent)
+                .ProjectTo<MessageDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+
+            return messages;
+        }
+
+        public void RemoveConnection(Connection connection)
+        {
+            _context.Connections.Remove(connection);
+        }
+
+        public async Task<Message> GetMessage(int id)
+        {
+            return await _context.Messages.Include(x => x.Sender).Include(x => x.Recipient)
+            .SingleOrDefaultAsync(y => y.Id == id);
         }
 
         public async Task<PagedList<MessageDto>> GetMessagesForUser(MessageParams messageParams)
@@ -81,27 +103,6 @@ namespace API.Data
             };
 
             return await PagedList<MessageDto>.CreateAsync(query, messageParams.PageNumber, messageParams.PageSize);
-        }
-
-        public async Task<IEnumerable<MessageDto>> GetMessageThread(string currentUsername, string recipientUsername)
-        {
-            var messages = await _context.Messages
-                .Where(m => m.Recipient.UserName == currentUsername && m.RecipientDeleted == false
-                        && m.Sender.UserName == recipientUsername
-                        || m.Recipient.UserName == recipientUsername
-                        && m.Sender.UserName == currentUsername && m.SenderDeleted == false
-                )
-                .MarkUnreadAsRead(currentUsername)
-                .OrderBy(m => m.MessageSent)
-                .ProjectTo<MessageDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
-
-            return messages;
-        }
-
-        public void RemoveConnection(Connection connection)
-        {
-            _context.Connections.Remove(connection);
         }
     }
 }

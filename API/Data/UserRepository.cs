@@ -63,7 +63,7 @@ namespace API.Data
             .SingleOrDefaultAsync(x => x.UserName == username);
         }
 
-        public async Task<string> GetUserGender(string username)
+        public async Task<string> GetUserGenderAsync(string username)
         {
             return await _context.Users
                 .Where(x => x.UserName == username)
