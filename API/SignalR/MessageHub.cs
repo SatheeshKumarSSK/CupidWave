@@ -46,7 +46,7 @@ namespace API.SignalR
 
         public override async Task OnDisconnectedAsync(Exception exception)
         {
-            var group = await RemoveFromMessageFromGroup();
+            var group = await RemoveFromMessageGroup();
             await Clients.Group(group.Name).SendAsync("UpdatedGroup", group);
             await base.OnDisconnectedAsync(exception);
         }
@@ -82,7 +82,7 @@ namespace API.SignalR
             }
             else
             {
-                var connections = await _tracker.GetConnectionsForUsers(recipient.UserName);
+                var connections = await _tracker.GetConnectionsForUser(recipient.UserName);
                 if (connections != null)
                 {
                     await _presenceHub.Clients.Clients(connections).SendAsync("NewMessageReceived",
@@ -117,7 +117,7 @@ namespace API.SignalR
             throw new Exception("Failed to join to group");
         }
 
-        private async Task<Group> RemoveFromMessageFromGroup()
+        private async Task<Group> RemoveFromMessageGroup()
         {
             var group = await _unitOfWork.MessageRepository.GetGroupForConnection(Context.ConnectionId);
             var connection = group.Connections.FirstOrDefault(x => x.ConnectionId == Context.ConnectionId);

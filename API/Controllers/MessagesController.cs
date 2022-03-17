@@ -13,7 +13,7 @@ public class MessagesController : BaseApiController
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessagesForUser([FromQuery]
-            MessageParams messageParams)
+        MessageParams messageParams)
     {
         messageParams.Username = User.GetUsername();
 
