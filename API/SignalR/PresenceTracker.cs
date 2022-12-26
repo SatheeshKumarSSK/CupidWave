@@ -26,7 +26,6 @@ namespace API.SignalR
             }
             return Task.FromResult(isOnline);
         }
-
         public Task<bool> UserDisconnected(string username, string connectionId)
         {
             bool isOffline = false;
@@ -44,7 +43,6 @@ namespace API.SignalR
             }
             return Task.FromResult(isOffline);
         }
-        
         public Task<string[]> GetOnlineUsers()
         {
             string[] onlineUsers;
@@ -56,7 +54,7 @@ namespace API.SignalR
             return Task.FromResult(onlineUsers);
         }
 
-        public Task<List<string>> GetConnectionsForUser(string username)
+        public Task<List<string>> GetConnectionsForUsers(string username)
         {
             List<string> connectionIds;
             lock (OnlineUsers)

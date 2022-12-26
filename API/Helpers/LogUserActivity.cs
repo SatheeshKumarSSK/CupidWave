@@ -9,8 +9,7 @@ namespace API.Helpers
 {
     public class LogUserActivity : IAsyncActionFilter
     {
-        public async Task OnActionExecutionAsync(ActionExecutingContext context, 
-            ActionExecutionDelegate next)
+        public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             var resultContext = await next();
 

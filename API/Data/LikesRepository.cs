@@ -18,13 +18,6 @@ namespace API.Data
             _context = context;
         }
 
-        public async Task<AppUser> GetUserWithFollowing(int userId)
-        {
-            return await _context.Users
-                .Include(x => x.Following)
-                .FirstOrDefaultAsync(x => x.Id == userId);
-        }
-
         public async Task<UserLike> GetUserLike(int sourceUserId, int likedUserId)
         {
             return await _context.Likes.FindAsync(sourceUserId, likedUserId);
@@ -58,6 +51,13 @@ namespace API.Data
             });
             return await PagedList<LikeDto>.CreateAsync(LikedUsers,
             likesParams.PageNumber, likesParams.PageSize);
+        }
+
+        public async Task<AppUser> GetUserWithFollowing(int userId)
+        {
+            return await _context.Users
+                .Include(x => x.Following)
+                .FirstOrDefaultAsync(x => x.Id == userId);
         }
     }
 }
