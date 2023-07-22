@@ -11,19 +11,19 @@
                 <ul class="navbar-nav mr-auto">
                     <ng-container *ngIf="accountService.currentUser$|async">
                         <li class="nav-item">
-                            <a class="nav-link" routerLink='/members' routerLinkActive="active">Matches</a>
+                            <a class="nav-link" (click)="toggleNavbar()" routerLink='/members' routerLinkActive="active">Matches</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" routerLink="/lists" routerLinkActive="active">Lists</a>
+                            <a class="nav-link" (click)="toggleNavbar()" routerLink="/lists" routerLinkActive="active">Lists</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
+                            <a class="nav-link" (click)="toggleNavbar()" routerLink="/messages" routerLinkActive="active">Messages</a>
                         </li>
                         <li *appHasRole='["Admin","Moderator"]' class="nav-item">
-                            <a class="nav-link" routerLink="/admin" routerLinkActive="active">Admin</a>
+                            <a class="nav-link" (click)="toggleNavbar()" routerLink="/admin" routerLinkActive="active">Admin</a>
                         </li>
                         <li *appHasRole='["Admin","Moderator"]' class="nav-item">
-                            <a class="nav-link" routerLink="/errors" routerLinkActive="active">Errors</a>
+                            <a class="nav-link" (click)="toggleNavbar()" routerLink="/errors" routerLinkActive="active">Errors</a>
                         </li>
                     </ng-container>                    
                 </ul>
@@ -32,7 +32,7 @@
                     <img src="{{user.photoUrl || './assets/user.png'}}" alt="{{user.username}}">
                     <a class="dropdown-toggle text-light ml-2pho" dropdownToggle>Welcome {{user.knownAs || user.username|titlecase}}</a>
                     <div class="dropdown-menu" *dropdownMenu="">
-                        <a routerLink="/member/edit" class="dropdown-item">Edit Profile</a>
+                        <a routerLink="/member/edit" (click)="toggleNavbar()" class="dropdown-item">Edit Profile</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" (click)="logout()">Logout</a>
                     </div>

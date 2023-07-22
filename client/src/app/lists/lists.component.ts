@@ -15,19 +15,25 @@ export class ListsComponent implements OnInit {
   pageSize = 5;
   pagination: Pagination;
   loading = false;
+  predicateChange = '';
 
   constructor(private memberService: MembersService) { }
 
   ngOnInit(): void {
     this.loadLikes();
+    this.predicateChange = this.predicate;
   }
 
   loadLikes() {
     this.loading = true;
+    if (this.predicateChange != this.predicate) {
+      this.pageNumber = 1;
+    }
     this.memberService.getLikes(this.predicate, this.pageNumber, this.pageSize).subscribe(response => {
       this.members = response.result;
       this.pagination = response.pagination;
       this.loading = false;
+      this.predicateChange = this.predicate;
     })
   }
 
@@ -35,7 +41,7 @@ export class ListsComponent implements OnInit {
     if (this.pageNumber !== event.page) {
       this.pageNumber = event.page;
       this.loadLikes();
-    }    
+    }
   }
 
 }

@@ -16,20 +16,26 @@ export class MessagesComponent implements OnInit {
   pageNumber: number = 1;
   pageSize: number = 5;
   loading = false;
+  containerChange = '';
 
   constructor(private messageService: MessageService, private confirmService: ConfirmService) { }
 
   ngOnInit(): void {
     this.loadMessages();
+    this.containerChange = this.container;
   }
 
   loadMessages() {
     this.loading = true;
+    if (this.containerChange != this.container) {
+      this.pageNumber = 1;
+    }
     this.messageService.getMessages(this.pageNumber, this.pageSize, this.container)
       .subscribe(response => {
         this.messages = response.result;
         this.pagination = response.pagination;
         this.loading = false;
+        this.containerChange = this.container;
       })
   }
 
