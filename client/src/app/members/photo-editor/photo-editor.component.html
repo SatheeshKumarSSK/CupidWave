@@ -64,15 +64,15 @@
                     <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
                 </div>
             </div>
-            <button type="button" class="btn btn-success ml-1 mt-1 btn-s"
+            <button type="button" class="btn btn-success ms-1 mt-1 btn-s"
                     (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
                 <span class="fa fa-upload"></span> Upload all
             </button>
-            <button type="button" class="btn btn-warning ml-1 mt-1 btn-s"
+            <button type="button" class="btn btn-warning ms-1 mt-1 btn-s"
                     (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
                 <span class="fa fa-ban"></span> Cancel all
             </button>
-            <button type="button" class="btn btn-danger ml-1 mt-1 btn-s"
+            <button type="button" class="btn btn-danger ms-1 mt-1 btn-s"
                     (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
                 <span class="fa fa-trash"></span> Remove all
             </button>

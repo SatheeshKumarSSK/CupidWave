@@ -2,12 +2,12 @@
     <h2 class="text-center text-primary">Sign Up</h2>
     <hr>
 
-    <div class="from-group">
+    <div class="from-group mb-2">
         <label class="control-label" style="margin-right: 1%;">I am a</label>
-        <label class="radio-inline">
-            <input type="radio" value="male" formControlName="gender">Male</label>
-        <label class="radio-inline">
-            <input type="radio" value="female" formControlName="gender" class="ml-3">Female</label>
+        <label class="form-check-label">
+            <input class="form-check-input" type="radio" value="male" formControlName="gender">Male</label>
+        <label class="form-check-label">
+            <input type="radio" value="female" formControlName="gender" class="form-check-input ms-3">Female</label>
     </div>
 
     <app-text-input [formControl]='registerForm.controls["username"]' 
@@ -31,8 +31,8 @@
     <app-text-input [formControl]='registerForm.controls["confirmPassword"]' 
     [label]='"Confirm Password"' [type]='"password"'></app-text-input>
 
-    <div class="form-group text-center">
-        <button [disabled]="!registerForm.valid" class="btn btn-success mr-2" type="submit">Register</button>
-        <button class="btn btn-secondary mr-2" type="button" (click)="cancel()">Cancel</button>
+    <div class="text-center">
+        <button [disabled]="!registerForm.valid" class="btn btn-success me-2" type="submit">Register</button>
+        <button class="btn btn-secondary me-2" type="button" (click)="cancel()">Cancel</button>
     </div>
 </form>

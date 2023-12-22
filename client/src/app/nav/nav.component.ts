@@ -12,18 +12,23 @@ export class NavComponent implements OnInit {
   model: any = {}
   navbarOpen = false;
 
-  constructor(public accountService: AccountService,private router:Router,
-    private toastr:ToastrService) { }
+  constructor(public accountService: AccountService, private router: Router,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
 
   login() {
+    if (!this.model.username || !this.model.password) {
+      this.toastr.error('Please enter the Username and Password');
+      return;
+    }
     this.accountService.login(this.model).subscribe(response => {
       this.toggleNavbar();
       this.router.navigateByUrl('/members');
     })
   }
+
   logout() {
     this.toggleNavbar();
     this.accountService.logout();
@@ -33,5 +38,4 @@ export class NavComponent implements OnInit {
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }
-
 }
