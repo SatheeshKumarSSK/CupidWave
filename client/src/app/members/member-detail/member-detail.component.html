@@ -42,9 +42,8 @@
                 <h4>Interests</h4>
                 <p>{{member.interests}}</p>
             </tab>
-            <tab heading="Photos" (selectTab)="onTabActivated($event)">
-                <ngx-gallery [options]="galleryOptions" [images]="galleryImages"
-                    style="display: inline-block;" class="ngx-gallery"></ngx-gallery>
+            <tab heading="Photos" (selectTab)="onTabActivated($event)" #photoTab="tab">
+                <gallery *ngIf="photoTab.active" [items]="images" class="gallery"></gallery>
             </tab>
             <tab heading="Messages" (selectTab)="onTabActivated($event)">
                 <app-member-messages [username]="member.username"></app-member-messages>
